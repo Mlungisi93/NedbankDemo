@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="d370c7ea-39c5-4759-9468-b922c517bcee" activeEnvironment="Default" name="SOAP Project 1" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" resourceRoot="" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="9443e9e1-ff00-4d4f-91f7-08a54655864b" wsaVersion="NONE" name="demoBinding" type="wsdl" bindingName="{urn:demo}demoBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:81/demo/services.php?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:81/demo/services.php?wsdl"><con:part><con:url>http://localhost:81/demo/services.php?wsdl</con:url><con:content><![CDATA[<definitions targetNamespace="urn:demo" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="urn:demo" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema targetNamespace="urn:demo">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+      <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/"/>
+      <xsd:complexType name="returnProduct">
+        <xsd:all>
+          <xsd:element name="ProductId" type="xsd:integer"/>
+          <xsd:element name="ProductName" type="xsd:string"/>
+          <xsd:element name="Description" type="xsd:string"/>
+          <xsd:element name="price" type="xsd:double"/>
+          <xsd:element name="category_id" type="xsd:integer"/>
+          <xsd:element name="category_name" type="xsd:string"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="arraydata">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:returnProduct[]" xmlns:wsdl1="http://schemas.xmlsoap.org/wsdl/"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="returnAllProduct">
+        <xsd:all>
+          <xsd:element name="ProductId" type="xsd:integer"/>
+          <xsd:element name="ProductName" type="xsd:string"/>
+          <xsd:element name="Description" type="xsd:string"/>
+          <xsd:element name="price" type="xsd:double"/>
+          <xsd:element name="category_id" type="xsd:integer"/>
+          <xsd:element name="category_name" type="xsd:string"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="arrayAlldata">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:returnProduct[]" xmlns:wsdl1="http://schemas.xmlsoap.org/wsdl/"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="returnProductKeyWord">
+        <xsd:all>
+          <xsd:element name="ProductId" type="xsd:integer"/>
+          <xsd:element name="ProductName" type="xsd:string"/>
+          <xsd:element name="Description" type="xsd:string"/>
+          <xsd:element name="price" type="xsd:double"/>
+          <xsd:element name="category_id" type="xsd:integer"/>
+          <xsd:element name="category_name" type="xsd:string"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="arraydataKeyWord">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:returnProductKeyWord[]" xmlns:wsdl1="http://schemas.xmlsoap.org/wsdl/"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+    </xsd:schema>
+  </types>
+  <message name="addProductRequest">
+    <part name="name" type="xsd:string"/>
+    <part name="price" type="xsd:decimal"/>
+    <part name="description" type="xsd:string"/>
+    <part name="category_id" type="xsd:integer"/>
+  </message>
+  <message name="addProductResponse">
+    <part name="addResults" type="xsd:string"/>
+  </message>
+  <message name="updateProductRequest">
+    <part name="id" type="xsd:integer"/>
+    <part name="name" type="xsd:string"/>
+    <part name="price" type="xsd:decimal"/>
+    <part name="description" type="xsd:string"/>
+    <part name="category_id" type="xsd:integer"/>
+  </message>
+  <message name="updateProductResponse">
+    <part name="return" type="xsd:string"/>
+  </message>
+  <message name="searchByIdRequest">
+    <part name="id" type="xsd:string"/>
+  </message>
+  <message name="searchByIdResponse">
+    <part name="return" type="tns:arraydata"/>
+  </message>
+  <message name="readAllProductsRequest">
+    <part name="" type="tns:"/>
+  </message>
+  <message name="readAllProductsResponse">
+    <part name="return" type="tns:arrayAlldata"/>
+  </message>
+  <message name="searchByKeywordRequest">
+    <part name="id" type="xsd:string"/>
+  </message>
+  <message name="searchByKeywordResponse">
+    <part name="return" type="tns:arraydataKeyWord"/>
+  </message>
+  <message name="deleteByIdRequest">
+    <part name="id" type="xsd:integer"/>
+  </message>
+  <message name="deleteByIdResponse">
+    <part name="return" type="xsd:string"/>
+  </message>
+  <portType name="demoPortType">
+    <operation name="addProduct">
+      <input message="tns:addProductRequest"/>
+      <output message="tns:addProductResponse"/>
+    </operation>
+    <operation name="updateProduct">
+      <input message="tns:updateProductRequest"/>
+      <output message="tns:updateProductResponse"/>
+    </operation>
+    <operation name="searchById">
+      <input message="tns:searchByIdRequest"/>
+      <output message="tns:searchByIdResponse"/>
+    </operation>
+    <operation name="readAllProducts">
+      <input message="tns:readAllProductsRequest"/>
+      <output message="tns:readAllProductsResponse"/>
+    </operation>
+    <operation name="searchByKeyword">
+      <input message="tns:searchByKeywordRequest"/>
+      <output message="tns:searchByKeywordResponse"/>
+    </operation>
+    <operation name="deleteById">
+      <input message="tns:deleteByIdRequest"/>
+      <output message="tns:deleteByIdResponse"/>
+    </operation>
+  </portType>
+  <binding name="demoBinding" type="tns:demoPortType">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="addProduct">
+      <soap:operation soapAction="http://localhost/demo/services.php/addProduct" style="rpc"/>
+      <input>
+        <soap:body use="encoded" namespace="" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+    <operation name="updateProduct">
+      <soap:operation soapAction="http://localhost/demo/services.php/updateProduct" style="rpc"/>
+      <input>
+        <soap:body use="encoded" namespace="" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+    <operation name="searchById">
+      <soap:operation soapAction="http://localhost/demo/services.php/searchById" style="rpc"/>
+      <input>
+        <soap:body use="encoded" namespace="urn:demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+    <operation name="readAllProducts">
+      <soap:operation soapAction="http://localhost/demo/services.php/readAllProducts" style="rpc"/>
+      <input>
+        <soap:body use="encoded" namespace="urn:demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+    <operation name="searchByKeyword">
+      <soap:operation soapAction="http://localhost/demo/services.php/searchByKeyword" style="rpc"/>
+      <input>
+        <soap:body use="encoded" namespace="urn:demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+    <operation name="deleteById">
+      <soap:operation soapAction="http://localhost/demo/services.php/deleteById" style="rpc"/>
+      <input>
+        <soap:body use="encoded" namespace="" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="demo">
+    <port name="demoPort" binding="tns:demoBinding">
+      <soap:address location="http://localhost:81/demo/services.php"/>
+    </port>
+  </service>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:81/demo/services.php</con:endpoint></con:endpoints><con:operation id="e8b285c4-01c3-484d-a96a-8629fe7aaf4c" isOneWay="false" action="http://localhost/demo/services.php/addProduct" name="addProduct" bindingOperationName="addProduct" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="05e26c04-0e0e-4869-82a6-b1b3dcaedef7" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/demo/services.php</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <addProduct soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">\r
+         <name xsi:type="xsd:string">Sumsung J6 plus</name>\r
+         <price xsi:type="xsd:decimal">4000.00</price>\r
+         <description xsi:type="xsd:string">Android 8</description>\r
+         <category_id xsi:type="xsd:integer">2</category_id>\r
+      </addProduct>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://localhost/demo/services.php/addProduct"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="b36cae8d-dcee-464b-a7e7-49ae1ac6e9f2" isOneWay="false" action="http://localhost/demo/services.php/updateProduct" name="updateProduct" bindingOperationName="updateProduct" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f3f83e97-3a21-49b1-a5e6-184fc4da40d6" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/demo/services.php</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <updateProduct soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">\r
+         <id xsi:type="xsd:integer">1</id>\r
+         <name xsi:type="xsd:string">Samsung updated</name>\r
+         <price xsi:type="xsd:decimal">100</price>\r
+         <description xsi:type="xsd:string">jejeje</description>\r
+         <category_id xsi:type="xsd:integer">2</category_id>\r
+      </updateProduct>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://localhost/demo/services.php/updateProduct"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="4b98364b-f996-4426-ae7b-0469f1dc1607" isOneWay="false" action="http://localhost/demo/services.php/searchById" name="searchById" bindingOperationName="searchById" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="0e8a6a49-a3c2-4217-b5bb-1223dbe2cf22" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/demo/services.php</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <searchById soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">\r
+         <id xsi:type="xsd:integer">1</id>\r
+      </searchById>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://localhost/demo/services.php/searchById"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="56ffbbdf-ce24-46e3-885f-406fb10d51bf" isOneWay="false" action="http://localhost/demo/services.php/searchByKeyword" name="searchByKeyword" bindingOperationName="searchByKeyword" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="baa77e32-d1d5-46a0-9c55-c12a947769cb" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/demo/services.php</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <searchByKeyword soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">\r
+         <keyword xsi:type="xsd:string">samsung</keyword>\r
+      </searchByKeyword>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://localhost/demo/services.php/searchByKeyword"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="743acafc-7f39-4a94-86e2-d02d6463b443" isOneWay="false" action="http://localhost/demo/services.php/deleteById" name="deleteById" bindingOperationName="deleteById" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d1217f47-a4d2-407a-b562-f7003d6c3494" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/demo/services.php</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <deleteById soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">\r
+         <id xsi:type="xsd:integer">800</id>\r
+      </deleteById>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://localhost/demo/services.php/deleteById"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="13959f3e-bbd5-4aec-81f6-83b9b4406cc3" isOneWay="false" action="http://localhost/demo/services.php/readAllProducts" name="readAllProducts" bindingOperationName="readAllProducts" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="2b863b5f-7a7f-4340-a3f1-5f9e6abde713" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/demo/services.php</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:demo">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <urn:readAllProducts soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://localhost/demo/services.php/readAllProducts"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="2631101b-d17f-452a-9625-32f5b04b2d2d" name="demoBinding TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="052b1bd5-3961-4e1c-b96f-e81c431eb6a0" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="displayAllProducts TestCase" searchProperties="true"><con:settings/><con:testStep type="request" name="SOAP Request" id="db499cc7-6ad2-4fd2-a5d5-6646e6d48965"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>demoBinding</con:interface><con:operation>readAllProducts</con:operation><con:request name="SOAP Request" id="07ed7056-0132-4785-a81b-0ff397766197"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/demo/services.php</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:demo">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <urn:readAllProducts soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="e6bc6e5a-46c6-4d31-8c99-3706b0ff6775"/><con:assertion type="XPath Match" id="b885cbed-80b6-4f60-8438-b5f45afb5d07" name="XPath Match"><con:configuration><path>declare namespace SOAP-ENV='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace tns='urn:demo';
+declare namespace ns1='urn:demo';
+declare namespace SOAP-ENC='http://schemas.xmlsoap.org/soap/encoding/';
+
+//count(ns1:readAllProductsResponse/return/item/ProductId/text())</path><content>28</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="cedc91f8-c0b8-441c-aecc-f767cb8517a9" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="addProduct TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="2c0a52b7-6f8c-47fb-87e8-ba05c1e06d82" name="addProduct"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>demoBinding</con:interface><con:operation>addProduct</con:operation><con:request name="addProduct" id="d768f8a6-b157-494f-a815-b7228c9cc916"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/demo/services.php</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <addProduct soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">\r
+         <name xsi:type="xsd:string">Created Apple4</name>\r
+         <price xsi:type="xsd:decimal">2.50</price>\r
+         <description xsi:type="xsd:string">fruit</description>\r
+         <category_id xsi:type="xsd:integer">3</category_id>\r
+      </addProduct>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Simple Contains" id="7944ae89-d32e-47fe-b6be-1e92fa069648" name="Contains"><con:configuration><token>Product was created</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="cd6de6c6-4d77-4114-8d57-e8780b78d93b" name="Valid HTTP Status Codes"><con:configuration><codes>201</codes></con:configuration></con:assertion><con:assertion type="XPath Match" id="1430c7cb-eb95-468c-a42d-e797dea87cb6" name="XPath Match"><con:configuration><path>declare namespace SOAP-ENV='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns1='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace SOAP-ENC='http://schemas.xmlsoap.org/soap/encoding/';
+//ns1:addProductResponse/return/text()</path><content>Product was created</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="Response SLA Assertion" id="ea4d507f-75eb-46a7-87c2-d8cda0bddd4e" name="Response SLA"><con:configuration><SLA>100</SLA></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://localhost/demo/services.php/addProduct" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="KeyWord" id="747b8f34-27e6-44e6-aa47-c7dd1df7d503"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>productName</con:name><con:sourceType>RawRequest</con:sourceType><con:sourceStep>addProduct</con:sourceStep><con:sourcePath>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns1='urn:demo';
+//name/text()</con:sourcePath><con:targetType>Keyword</con:targetType><con:targetStep>#TestSuite#</con:targetStep><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="eda95336-e951-4266-a2b3-19ad13d3b1c0" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="addProduct Negetive TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="ef4aee00-4304-4ca3-910b-3bd0fca0c155" name="addProduct"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>demoBinding</con:interface><con:operation>addProduct</con:operation><con:request name="addProduct" id="d768f8a6-b157-494f-a815-b7228c9cc916"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/demo/services.php</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <addProduct soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">\r
+         <name xsi:type="xsd:string">Created Apple4</name>\r
+         <price xsi:type="xsd:decimal">2.50</price>\r
+         <description xsi:type="xsd:string">fruit</description>\r
+         <category_id xsi:type="xsd:integer">3</category_id>\r
+      </addProduct>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Simple Contains" id="7944ae89-d32e-47fe-b6be-1e92fa069648" name="Contains"><con:configuration><token>Product Created Apple4 already exist in the database</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="cd6de6c6-4d77-4114-8d57-e8780b78d93b" name="Valid HTTP Status Codes"><con:configuration><codes>503</codes></con:configuration></con:assertion><con:assertion type="XPath Match" id="1430c7cb-eb95-468c-a42d-e797dea87cb6" name="XPath Match"><con:configuration><path>declare namespace SOAP-ENV='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns1='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace SOAP-ENC='http://schemas.xmlsoap.org/soap/encoding/';
+//ns1:addProductResponse/return/text()</path><content>Product Created Apple4 already exist in the database</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="Response SLA Assertion" id="ea4d507f-75eb-46a7-87c2-d8cda0bddd4e" name="Response SLA"><con:configuration><SLA>100</SLA></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://localhost/demo/services.php/addProduct" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="KeyWord" id="abc3a145-e913-41c9-b76d-ab8034ae7136"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>productName</con:name><con:sourceType>RawRequest</con:sourceType><con:sourceStep>addProduct</con:sourceStep><con:sourcePath>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns1='urn:demo';
+//name/text()</con:sourcePath><con:targetType>Keyword</con:targetType><con:targetStep>#TestSuite#</con:targetStep><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="43e39570-e9d3-4995-84cc-6fdccd1f05c5" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="searchByKeyword TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="f526a9f7-e828-4a7c-a914-3a97285e381e" name="searchByKeyword"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>demoBinding</con:interface><con:operation>searchByKeyword</con:operation><con:request name="searchByKeyword" id="cc7a4a1d-9155-49b2-8e27-59c30d6a107d"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/demo/services.php</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <searchByKeyword soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">\r
+         <keyword xsi:type="xsd:string">${#TestSuite#Keyword}</keyword>\r
+      </searchByKeyword>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Simple Contains" id="ab42ccca-f57f-4c05-8431-2bf778e1611d" name="Contains"><con:configuration><token>Created Apple4</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="4952eefe-353f-4600-8dc7-b74e78dae07f" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="XPath Match" id="dead09e9-032a-461c-a648-87f3d70c8666" name="XPath Match"><con:configuration><path>declare namespace SOAP-ENV='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace tns='urn:demo';
+declare namespace ns1='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace SOAP-ENC='http://schemas.xmlsoap.org/soap/encoding/';
+
+//count(ns1:searchByKeywordResponse/return/item/ProductId/text())</path><content>1</content><allowWildcards>true</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="Response SLA Assertion" id="994627bc-ed3c-4dc4-ad72-0e2a9d802dd7" name="Response SLA"><con:configuration><SLA>100</SLA></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://localhost/demo/services.php/searchByKeyword" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="IdTransfer" id="3f17cc2a-c554-4870-bbc2-8ea581f7b09b"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>Id</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>searchByKeyword</con:sourceStep><con:sourcePath>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns1='urn:demo';
+//ProductId/text()</con:sourcePath><con:targetType>Id</con:targetType><con:targetStep>#TestSuite#</con:targetStep><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="24d5b387-bed8-4560-8ffd-ac82046961a6" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="searchByKeyword Negetive TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="dbd875fe-1dbb-478f-a8f5-a8387bb851cf" name="searchByKeyword"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>demoBinding</con:interface><con:operation>searchByKeyword</con:operation><con:request name="searchByKeyword" id="cc7a4a1d-9155-49b2-8e27-59c30d6a107d"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/demo/services.php</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <searchByKeyword soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">\r
+         <keyword xsi:type="xsd:string">mlungisi</keyword>\r
+      </searchByKeyword>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Simple Contains" id="ab42ccca-f57f-4c05-8431-2bf778e1611d" name="Contains"><con:configuration><token>Product with mlungisi keyword does not exist in the database</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="4952eefe-353f-4600-8dc7-b74e78dae07f" name="Valid HTTP Status Codes"><con:configuration><codes>503</codes></con:configuration></con:assertion><con:assertion type="XPath Match" id="dead09e9-032a-461c-a648-87f3d70c8666" name="XPath Match"><con:configuration><path>declare namespace SOAP-ENV='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace tns='urn:demo';
+declare namespace ns1='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace SOAP-ENC='http://schemas.xmlsoap.org/soap/encoding/';
+
+//count(ns1:searchByKeywordResponse/return/item/ProductId/text())</path><content>0</content><allowWildcards>true</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="Response SLA Assertion" id="994627bc-ed3c-4dc4-ad72-0e2a9d802dd7" name="Response SLA"><con:configuration><SLA>100</SLA></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://localhost/demo/services.php/searchByKeyword" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="IdTransfer" id="162ffdcd-ba82-43ec-860d-d876ceb9947c"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>Id</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>searchByKeyword</con:sourceStep><con:sourcePath>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns1='urn:demo';
+//ProductId/text()</con:sourcePath><con:targetType>Id</con:targetType><con:targetStep>#TestSuite#</con:targetStep><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="1f91198a-762c-4738-ba86-6ab641b03130" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="searchById TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="58b73bc2-a40e-4431-9064-1960e347a0e7" name="searchById"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>demoBinding</con:interface><con:operation>searchById</con:operation><con:request name="searchById" id="d8fda7b9-02e4-4c19-8779-494914e41452"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/demo/services.php</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <searchById soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">\r
+         <id xsi:type="xsd:integer">${#TestSuite#Id}</id>\r
+      </searchById>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="XPath Match" id="28b80e85-6628-4009-b297-00d5c8867b88" name="XPath Match"><con:configuration><path>declare namespace SOAP-ENV='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace tns='urn:demo';
+declare namespace ns1='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace SOAP-ENC='http://schemas.xmlsoap.org/soap/encoding/';
+
+//ns1:searchByIdResponse/return/item/ProductId/text()</path><content>84</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="Simple Contains" id="11649f70-ec75-45cd-a35f-c1a3b0e61649" name="Contains"><con:configuration><token>Created </token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Invalid HTTP Status Codes" id="9bd2fdf0-c147-429a-84c3-cf6152cd0096" name="Invalid HTTP Status Codes"><con:configuration><codes>404</codes></con:configuration></con:assertion><con:assertion type="Response SLA Assertion" id="35ed3cae-0f48-4a72-9610-f32ac53de009" name="Response SLA"><con:configuration><SLA>100</SLA></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="3d8ea279-10e9-458c-aec3-020c2e49f9eb" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://localhost/demo/services.php/searchById" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="KeyWordTransfer" id="65af7de8-4f84-4114-84c6-8eea83d2f71d"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>KeyWord</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>searchById</con:sourceStep><con:sourcePath>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns1='urn;demo';
+</con:sourcePath><con:targetType>Request</con:targetType><con:targetStep>searchById</con:targetStep><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="4cec4b70-81a4-458c-a686-289a5cb81b14" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="searchById Negetive TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="7a51b732-c680-45c4-bd99-ea7728e15cad" name="searchById"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>demoBinding</con:interface><con:operation>searchById</con:operation><con:request name="searchById" id="d8fda7b9-02e4-4c19-8779-494914e41452"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/demo/services.php</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <searchById soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">\r
+         <id xsi:type="xsd:integer">100</id>\r
+      </searchById>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="XPath Match" id="28b80e85-6628-4009-b297-00d5c8867b88" name="XPath Match"><con:configuration><path>declare namespace SOAP-ENV='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace tns='urn:demo';
+declare namespace ns1='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace SOAP-ENC='http://schemas.xmlsoap.org/soap/encoding/';
+
+//count(ns1:searchByIdResponse/return/item/ProductId/text())</path><content>0</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="Simple Contains" id="11649f70-ec75-45cd-a35f-c1a3b0e61649" name="Contains"><con:configuration><token> does not exist in the database</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Invalid HTTP Status Codes" id="9bd2fdf0-c147-429a-84c3-cf6152cd0096" name="Invalid HTTP Status Codes"><con:configuration><codes>404</codes></con:configuration></con:assertion><con:assertion type="Response SLA Assertion" id="35ed3cae-0f48-4a72-9610-f32ac53de009" name="Response SLA"><con:configuration><SLA>100</SLA></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="3d8ea279-10e9-458c-aec3-020c2e49f9eb" name="Valid HTTP Status Codes"><con:configuration><codes>503</codes></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://localhost/demo/services.php/searchById" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="KeyWordTransfer" id="26d20f27-1aca-49dd-8d65-b1e019967e6a"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>KeyWord</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>searchById</con:sourceStep><con:sourcePath>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns1='urn;demo';
+</con:sourcePath><con:targetType>Request</con:targetType><con:targetStep>searchById</con:targetStep><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="75db84f6-9ff5-4c38-82cd-d689cbd21fbb" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="updateProduct TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="36f87f56-1c53-4fe6-95c4-ea03a3f3d89b" name="updateProduct"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>demoBinding</con:interface><con:operation>updateProduct</con:operation><con:request name="updateProduct" id="9dd0e328-65f7-4f2a-b3b7-63df27da1ffa"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/demo/services.php</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <updateProduct soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">\r
+         <id xsi:type="xsd:integer">77</id>\r
+         <name xsi:type="xsd:string">?</name>\r
+         <price xsi:type="xsd:decimal">?</price>\r
+         <description xsi:type="xsd:string">?</description>\r
+         <category_id xsi:type="xsd:integer">?</category_id>\r
+      </updateProduct>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://localhost/demo/services.php/updateProduct" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="025d4402-2f8d-4d58-b910-10362a653a8f" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="updateProduct Negetive TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="910a2c4b-e6ed-4400-9d4a-0b5bb576863f" name="updateProduct"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>demoBinding</con:interface><con:operation>updateProduct</con:operation><con:request name="updateProduct" id="9dd0e328-65f7-4f2a-b3b7-63df27da1ffa"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/demo/services.php</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <updateProduct soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">\r
+         <id xsi:type="xsd:integer">1000</id>\r
+         <name xsi:type="xsd:string">hdhdh</name>\r
+         <price xsi:type="xsd:decimal">snsns</price>\r
+         <description xsi:type="xsd:string">snsjs</description>\r
+         <category_id xsi:type="xsd:integer">30</category_id>\r
+      </updateProduct>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Simple Contains" id="7ca91184-8ced-4c69-ace3-d23257200ec2" name="Contains"><con:configuration><token>does not exist in the database</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://localhost/demo/services.php/updateProduct" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="f045d0ea-8c45-4a45-9e2f-5522f1644030" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="deleteById TestCase" searchProperties="true"><con:settings/><con:testStep type="request" name="SOAP Request" id="aba7a57b-2265-4563-96ca-39adcc344014"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>demoBinding</con:interface><con:operation>deleteById</con:operation><con:request name="SOAP Request" id="db8ebdec-17d3-435b-a784-60c2671a4d9e"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/demo/services.php</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <deleteById soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">\r
+         <id xsi:type="xsd:integer">${#TestSuite#Id}</id>\r
+      </deleteById>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Simple Contains" id="8d5f6a1b-2a48-447c-a4b5-22813b65e06e" name="Contains"><con:configuration><token>has been deleted successfully</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="067d7cdd-0308-4c23-b7e0-ede385053e7b" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="XPath Match" id="ee31b05b-e701-43cd-ad03-fa98d149734f" name="XPath Match"><con:configuration><path>declare namespace SOAP-ENV='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns1='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace SOAP-ENC='http://schemas.xmlsoap.org/soap/encoding/';
+//ns1:deleteByIdResponse/return/text()</path><content>Product with '.84.' has been deleted successfully</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="5cd4c791-6578-4345-aa9d-7f325d585844" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="deleteById NegetiveTestCase" searchProperties="true"><con:settings/><con:testStep type="request" name="SOAP Request" id="61fe8e9d-b140-486b-a644-054420110c9e"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>demoBinding</con:interface><con:operation>deleteById</con:operation><con:request name="SOAP Request" id="db8ebdec-17d3-435b-a784-60c2671a4d9e"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/demo/services.php</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <deleteById soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">\r
+         <id xsi:type="xsd:integer">${#TestSuite#Id}</id>\r
+      </deleteById>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Simple Contains" id="8d5f6a1b-2a48-447c-a4b5-22813b65e06e" name="Contains"><con:configuration><token>Product Id No</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="067d7cdd-0308-4c23-b7e0-ede385053e7b" name="Valid HTTP Status Codes"><con:configuration><codes>503</codes></con:configuration></con:assertion><con:assertion type="XPath Match" id="ee31b05b-e701-43cd-ad03-fa98d149734f" name="XPath Match"><con:configuration><path>declare namespace SOAP-ENV='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns1='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace SOAP-ENC='http://schemas.xmlsoap.org/soap/encoding/';
+//ns1:deleteByIdResponse/return/text()</path><content>Product Id No: 84 does not exist in the database</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="3f86a876-a159-4ef7-9228-4d7c26860636" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="End to End Testing" searchProperties="true"><con:settings/><con:testStep type="request" name="AddProduct" id="f4175ffe-0598-4075-a152-eed0fb29e9f5"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>demoBinding</con:interface><con:operation>addProduct</con:operation><con:request name="AddProduct" id="ab30f888-6482-4827-8f28-e98d54312cf1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/demo/services.php</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <addProduct soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">\r
+         <name xsi:type="xsd:string">Testing Sample</name>\r
+         <price xsi:type="xsd:decimal">12000</price>\r
+         <description xsi:type="xsd:string">everything</description>\r
+         <category_id xsi:type="xsd:integer">3</category_id>\r
+      </addProduct>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="76758d5f-a34a-4c63-96aa-3cfa8ebc4ebe"/><con:assertion type="Simple Contains" id="91625114-6a83-460b-952b-5425c64927bc" name="Contains"><con:configuration><token>Product was created</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="KeyWordTransfer" id="f6d78194-b3c1-44b4-9b15-4ec198dfd84f"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>productName</con:name><con:sourceType>Request</con:sourceType><con:sourceStep>AddProduct</con:sourceStep><con:sourcePath>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns1='urn:demo';
+//name/text()</con:sourcePath><con:targetType>name</con:targetType><con:targetStep>#TestCase#</con:targetStep><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="request" id="2d79fd54-c201-43dd-b8ce-d85dd5a6eac9" name="SearchByKeyword"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>demoBinding</con:interface><con:operation>searchByKeyword</con:operation><con:request name="SearchByKeyword" id="cc7a4a1d-9155-49b2-8e27-59c30d6a107d"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/demo/services.php</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <searchByKeyword soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">\r
+         <keyword xsi:type="xsd:string">${#TestCase#name}</keyword>\r
+      </searchByKeyword>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Simple Contains" id="ab42ccca-f57f-4c05-8431-2bf778e1611d" name="Contains"><con:configuration><token>Testing Sample</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="4952eefe-353f-4600-8dc7-b74e78dae07f" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="XPath Match" id="dead09e9-032a-461c-a648-87f3d70c8666" name="XPath Match"><con:configuration><path>declare namespace SOAP-ENV='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace tns='urn:demo';
+declare namespace ns1='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace SOAP-ENC='http://schemas.xmlsoap.org/soap/encoding/';
+
+//count(ns1:searchByKeywordResponse/return/item/ProductId/text())</path><content>1</content><allowWildcards>true</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="Response SLA Assertion" id="994627bc-ed3c-4dc4-ad72-0e2a9d802dd7" name="Response SLA"><con:configuration><SLA>100</SLA></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://localhost/demo/services.php/searchByKeyword" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="IdTransfer" id="415814db-d389-4f3e-a286-9953a4a330a5"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>Id</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>SearchByKeyword</con:sourceStep><con:sourcePath>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns1='urn:demo';
+//ProductId/text()</con:sourcePath><con:targetType>id</con:targetType><con:targetStep>#TestCase#</con:targetStep><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="request" id="a36535f9-4ebd-4d02-b4a7-0bf292fd13ad" name="updateProduct"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>demoBinding</con:interface><con:operation>updateProduct</con:operation><con:request name="updateProduct" id="9dd0e328-65f7-4f2a-b3b7-63df27da1ffa"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/demo/services.php</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <updateProduct soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">\r
+         <id xsi:type="xsd:integer">${#TestCase#id}</id>\r
+         <name xsi:type="xsd:string">Testing Sample updated</name>\r
+         <price xsi:type="xsd:decimal">10000</price>\r
+         <description xsi:type="xsd:string">price reduced</description>\r
+         <category_id xsi:type="xsd:integer">3</category_id>\r
+      </updateProduct>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://localhost/demo/services.php/updateProduct" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="Delete Product" id="c449ab59-a2a1-424f-a3fc-83b672a21ff2"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>demoBinding</con:interface><con:operation>deleteById</con:operation><con:request name="Delete Product" id="db8ebdec-17d3-435b-a784-60c2671a4d9e"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:81/demo/services.php</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <deleteById soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">\r
+         <id xsi:type="xsd:integer">${#TestCase#id}</id>\r
+      </deleteById>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Simple Contains" id="8d5f6a1b-2a48-447c-a4b5-22813b65e06e" name="Contains"><con:configuration><token>has been deleted successfully</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="067d7cdd-0308-4c23-b7e0-ede385053e7b" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties><con:property><con:name>name</con:name><con:value>Testing Sample</con:value></con:property><con:property><con:name>id</con:name><con:value>89</con:value></con:property></con:properties></con:testCase><con:properties><con:property><con:name>Keyword</con:name><con:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Created Apple4</con:value></con:property><con:property><con:name>Id</con:name><con:value>84</con:value></con:property></con:properties></con:testSuite><con:properties><con:property><con:name>name</con:name><con:value>abc</con:value></con:property></con:properties><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
